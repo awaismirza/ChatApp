@@ -27,6 +27,7 @@
         }
 
         #messages li:nth-child(odd) {
+            color: #ffffff;
             background: #000;
         }
     </style>
@@ -39,7 +40,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <form action="">
+            <form id="message-form" action="">
                 <div class="input-group">
                     <input id="m" autocomplete="off" type="text" class="form-control" placeholder="Message..."
                            aria-label="Message...">
@@ -65,11 +66,16 @@
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-    const socket = io.connect('http://localhost:3000');
-    socket.on('message', (data) => {
-        console.log(data);
-        socket.emit('another Event', {jeremy: 'I am great'});
-    })
+    const socket = io.connect();
+    $('form').submit(() =>{
+        socket.emit('message', $('#m').val());
+        $('#m').val('');
+        return false;
+    });
+
+    socket.on('message', (msg) =>{
+        $('#messages').append($('<li>').text(msg));
+    });
 </script>
 </body>
 </html>
