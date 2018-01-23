@@ -11,6 +11,12 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
+app.get('/javascript', (req, res) => {
+    res.sendFile(__dirname + '/public/javascript.html');
+});
+
+
+
 
 // Creating a Tect Name Space
 

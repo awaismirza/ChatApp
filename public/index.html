@@ -36,20 +36,11 @@
 
 <div class="container-fluid">
     <div class="row">
-        <ul id="messages"></ul>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-            <form id="message-form" action="">
-                <div class="input-group">
-                    <input id="m" autocomplete="off" type="text" class="form-control" placeholder="Message..."
-                           aria-label="Message...">
-                    <span class="input-group-btn">
-                    <button class="btn btn-secondary" type="submit">Send!</button>
-                </span>
-                </div>
-            </form>
-        </div>
+        <ul class="list-group">
+            <a href="/javascript" class="list-group-item list-group-item-action">JavaScript</a>
+            <a href="/swift" class="list-group-item list-group-item-action">Swift</a>
+            <a href="/html" class="list-group-item list-group-item-action">html</a>
+        </ul>
     </div>
 </div>
 
@@ -64,28 +55,5 @@
         crossorigin="anonymous"></script>
 
 
-<script src="/socket.io/socket.io.js"></script>
-<script>
-
-    const room = 'javascript';
-
-    const socket = io.connect('/tech');
-
-    $('form').submit(() =>{
-        let msg = $('#m').val();
-        socket.emit('message', {msg, room});
-        $('#m').val('');
-        return false;
-    });
-
-    socket.on('connect', () =>{
-        // Emiting to everybody
-        socket.emit('join', {room: room});
-    });
-
-    socket.on('message', (msg) =>{
-        $('#messages').append($('<li>').text(msg));
-    });
-</script>
 </body>
 </html>
