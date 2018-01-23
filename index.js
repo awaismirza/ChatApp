@@ -14,6 +14,12 @@ app.get('/', (req, res) => {
 app.get('/javascript', (req, res) => {
     res.sendFile(__dirname + '/public/javascript.html');
 });
+app.get('/swift', (req, res) => {
+    res.sendFile(__dirname + '/public/swift.html');
+});
+app.get('/html', (req, res) => {
+    res.sendFile(__dirname + '/public/html.html');
+});
 
 
 
