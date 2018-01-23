@@ -11,17 +11,24 @@ app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 
-io.on('connection', (socket) => {
+
+// Creating a Tect Name Space
+
+const tech = io.of('/tech');
+
+
+
+tech.on('connection', (socket) => {
     console.log('User Connected');
     socket.on('message', (msg) => {
         console.log(`message: ${msg}`);
-        io.emit('message', msg);
+        tech.emit('message', msg);
     });
 
-    socket.on('disconnect', () =>{
+   io.on('disconnect', () =>{
         console.log('User Disconnected');
 
-        io.emit('message', 'user disconnected');
+        tech.emit('message', 'user disconnected');
     })
 });
 
